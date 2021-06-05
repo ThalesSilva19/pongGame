@@ -59,7 +59,7 @@ int main()
     }
 
     addr.sin_family = AF_INET;
-    addr.sin_port = htons(1234);
+    addr.sin_port = htons(2201);
     addr.sin_addr.s_addr = inet_addr("34.202.4.119");
 
     memset(&addr.sin_zero, 0, sizeof(addr.sin_zero));
