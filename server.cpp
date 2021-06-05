@@ -17,7 +17,7 @@ void game_thread(GameInfo* game){
     while(game->score_b < 10 && game->score_a < 10){
 		game->action();
 		game->print_screen();
-		usleep(100000);
+		usleep(200000);
         char message[8];
         message[0] = game->score_a;
         message[1] = game->score_b;

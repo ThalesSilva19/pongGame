@@ -124,7 +124,7 @@ class GameInfo{
 	}
 
 	void print_screen(){
-		system("clear");
+		printf("\033c\n");
 
 		print_score();
 		print_player_b();
