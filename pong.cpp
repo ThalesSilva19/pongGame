@@ -10,7 +10,7 @@
 using namespace std;
 
 #define FIELD_WIDTH 51
-#define FIELD_HEIGHT 21
+#define FIELD_HEIGHT 31
 #define PLAYER_WIDTH 10
 
 class GameInfo{
@@ -23,12 +23,6 @@ class GameInfo{
 	int player_b = 6;
 	int score_a = 0;
 	int score_b = 0;
-
-	int read_keyboard(){
-		char code;
-		code = getch();
-		return code+38;
-	}
 
 	void kickout(int side){
 		speed_y = side;

@@ -4,6 +4,7 @@
 #include <arpa/inet.h>
 #include <netdb.h>
 #include <string.h>
+#include <iostream>
 
 #include "pong.cpp"
 
@@ -12,6 +13,7 @@ struct sockaddr_in addr;
 
 void game_thread(GameInfo* game){
     while(game->score_b < 10 && game->score_a < 10){
+		game->action();
 		game->print_screen();
 		usleep(100000);
 	}
@@ -29,21 +31,24 @@ void reciver_thread(GameInfo* game){
         game->speed_y = response[5];
         game->player_a = response[6];
         game->player_b = response[7];
-        game->print_screen();
+        //game->print_screen();
     }
 }
 
 void keyEvents(GameInfo* game){	
 	while(game->score_b < 10 && game->score_a < 10){	
-		code == game->read_keyboard()
+		char code = getchar();
+		printf("%d\n",code);
 		char message[1];
-		if(code == 106){
-			message[0] == 1;
+		message[0] = -1;
+		if(code == 'a'){
+			message[0] = 0;
+			send(meu_socket, message, 1, 0);
 		}
-		else if(code == 105){
-			message[0] == 0;
+		else if(code == 'd'){
+			message[0] = 1;
+			send(meu_socket, message, 1, 0);
 		}
-		send(meu_socket, message, 1, 0);
 	}
 }
 

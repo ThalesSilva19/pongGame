@@ -6,6 +6,7 @@
 #include <arpa/inet.h>
 #include <netdb.h>
 #include <thread>
+#include <iostream>
 
 #include"pong.cpp"
 
@@ -34,15 +35,14 @@ void reciver_thread(GameInfo* game){
     char response[1];
     while(game->score_b < 10 && game->score_a < 10){
         recv(sock_client, response, 1, 0); /* Recebe mensagem do cliente */
-		printf("%d\n",response[0]);
         if(response[0] == 1){
-            game->player_b += 2;
+            game->player_b += 3;
             if(game->player_b > FIELD_WIDTH - PLAYER_WIDTH){
                 game->player_b = FIELD_WIDTH - PLAYER_WIDTH;
             }
         }
-        else{
-            game->player_b -=2;
+        else if(response[0] == 0){
+            game->player_b -=3;
             if(game->player_b < 0) {
                 game->player_b = 0;
             }
@@ -52,15 +52,15 @@ void reciver_thread(GameInfo* game){
 
 void keyEvents(GameInfo* game){	
 	while(game->score_b < 10 && game->score_a < 10){
-		char code = game->read_keyboard();
-		if(code == 106){
-			game->player_a+= 2;
+		char code = getchar();
+		if(code == 	'd'){
+			game->player_a+= 3;
 			if(game->player_a > FIELD_WIDTH - PLAYER_WIDTH){
 				game->player_a = FIELD_WIDTH - PLAYER_WIDTH;
 			}
 		}
-		else if(code == 105){
-			game->player_a -=2;
+		else if(code == 'a'){
+			game->player_a -=3;
 			if(game->player_a < 0) {
 				game->player_a = 0;
 			}
@@ -88,7 +88,7 @@ int main(void) {
     }
 
     addr.sin_family = AF_INET;
-    addr.sin_port = htons(1234);
+   	addr.sin_port = htons(1234);
     addr.sin_addr.s_addr = INADDR_ANY;
     memset(&addr.sin_zero, 0, sizeof(addr.sin_zero));
 
