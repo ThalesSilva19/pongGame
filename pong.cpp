@@ -4,13 +4,8 @@
 #include<time.h>
 #include<iostream>
 #include<fstream>
-#include <thread>
-#ifdef LINUX
-#include<linux/input.h>
-#endif
-#ifdef WINDOWS
-#include<conio.h>
-#endif
+#include<thread>
+#include<curses.h>
 
 using namespace std;
 
@@ -30,24 +25,9 @@ class GameInfo{
 	int score_b = 0;
 
 	int read_keyboard(){
-#ifdef LINUX
-		input_event data;
-		ifstream file("/dev/input/event4"); //Event4 é para o meu PC, muda para cada um
-#endif
 		char code;
-#ifdef LINUX
-		file.read((char*)&data,sizeof(input_event));
-		if(data.type == EV_KEY){
-			code = data.code;
-		}
-		file.close
-		return code;
-#endif
-#ifdef WINDOWS
-		while( ! kbhit() ){}
 		code = getch();
 		return code+38;
-#endif
 	}
 
 	void kickout(int side){

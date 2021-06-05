@@ -34,6 +34,7 @@ void reciver_thread(GameInfo* game){
     char response[1];
     while(game->score_b < 10 && game->score_a < 10){
         recv(sock_client, response, 1, 0); /* Recebe mensagem do cliente */
+		printf("%d\n",response[0]);
         if(response[0] == 1){
             game->player_b += 2;
             if(game->player_b > FIELD_WIDTH - PLAYER_WIDTH){
@@ -51,7 +52,7 @@ void reciver_thread(GameInfo* game){
 
 void keyEvents(GameInfo* game){	
 	while(game->score_b < 10 && game->score_a < 10){
-		code = game->read_keyboard()
+		char code = game->read_keyboard();
 		if(code == 106){
 			game->player_a+= 2;
 			if(game->player_a > FIELD_WIDTH - PLAYER_WIDTH){
