@@ -34,23 +34,17 @@ void reciver_thread(GameInfo* game){
 }
 
 void keyEvents(GameInfo* game){	
-	input_event data;
-	ifstream file("/dev/input/event4"); //Event4 é para o meu PC, muda para cada um
-
 	while(game->score_b < 10 && game->score_a < 10){	
-		file.read((char*)&data,sizeof(input_event));
-		if(data.type == EV_KEY){
-            char message[1];
-			if(data.code == 106){
-                message[0] == 1;
-			}
-			else if(data.code == 105){
-                message[0] == 0;
-			}
-            send(meu_socket, message, 1, 0);
-		}		
+		code == game->read_keyboard()
+		char message[1];
+		if(code == 106){
+			message[0] == 1;
+		}
+		else if(code == 105){
+			message[0] == 0;
+		}
+		send(meu_socket, message, 1, 0);
 	}
-	file.close();
 }
 
 int main()

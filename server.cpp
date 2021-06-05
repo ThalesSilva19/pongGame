@@ -50,38 +50,31 @@ void reciver_thread(GameInfo* game){
 }
 
 void keyEvents(GameInfo* game){	
-	input_event data;
-	ifstream file("/dev/input/event4"); //Event4 é para o meu PC, muda para cada um
-
 	while(game->score_b < 10 && game->score_a < 10){
-		
-		file.read((char*)&data,sizeof(input_event));
-		if(data.type == EV_KEY){
-			if(data.code == 106){
-				game->player_a+= 2;
-				if(game->player_a > FIELD_WIDTH - PLAYER_WIDTH){
-					game->player_a = FIELD_WIDTH - PLAYER_WIDTH;
-				}
+		code = game->read_keyboard()
+		if(code == 106){
+			game->player_a+= 2;
+			if(game->player_a > FIELD_WIDTH - PLAYER_WIDTH){
+				game->player_a = FIELD_WIDTH - PLAYER_WIDTH;
 			}
-			else if(data.code == 105){
-				game->player_a -=2;
-				if(game->player_a < 0) {
-					game->player_a = 0;
-				}
+		}
+		else if(code == 105){
+			game->player_a -=2;
+			if(game->player_a < 0) {
+				game->player_a = 0;
 			}
-            char message[8];
-            message[0] = game->score_a;
-            message[1] = game->score_b;
-            message[2] = game->ball_x;
-            message[3] = game->ball_y;
-            message[4] = game->speed_x;
-            message[5] = game->speed_y;
-            message[6] = game->player_a;
-            message[7] = game->player_b;
-            send(sock_client, message, 8, 0);
-		}		
+		}
+		char message[8];
+		message[0] = game->score_a;
+		message[1] = game->score_b;
+		message[2] = game->ball_x;
+		message[3] = game->ball_y;
+		message[4] = game->speed_x;
+		message[5] = game->speed_y;
+		message[6] = game->player_a;
+		message[7] = game->player_b;
+		send(sock_client, message, 8, 0);
 	}
-	file.close();
 }
 
 int main(void) {
