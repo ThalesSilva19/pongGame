@@ -5,7 +5,7 @@
 #include<iostream>
 #include<fstream>
 #include<thread>
-#include<curses.h>
+
 
 using namespace std;
 
@@ -124,7 +124,7 @@ class GameInfo{
 	}
 
 	void print_screen(){
-		printf("\033c\n");
+		printf("\033c");
 
 		print_score();
 		print_player_b();
