@@ -13,7 +13,7 @@ struct sockaddr_in addr;
 
 void game_thread(GameInfo* game){
     while(game->score_b < 10 && game->score_a < 10){
-		game->action();
+		//game->action();
 		game->print_screen();
 		usleep(100000);
 	}
