@@ -13,6 +13,7 @@
 int sock_client;
 struct sockaddr_in addr;
 
+//A thread do jogo onde ele calcula todas posições e manda para o cliente.
 void game_thread(GameInfo* game){
     while(game->score_b < 10 && game->score_a < 10){
 		game->action();
@@ -31,6 +32,7 @@ void game_thread(GameInfo* game){
 	}
 }
 
+//A thread que escuta se o jogador b se movimentou.
 void reciver_thread(GameInfo* game){
     char response[1];
     while(game->score_b < 10 && game->score_a < 10){
@@ -50,6 +52,7 @@ void reciver_thread(GameInfo* game){
     }
 }
 
+//A thread que lê o teclado para movimentar o jogador a.
 void keyEvents(GameInfo* game){	
 	while(game->score_b < 10 && game->score_a < 10){
 		char code = getchar();
@@ -78,6 +81,8 @@ void keyEvents(GameInfo* game){
 	}
 }
 
+
+//Inicializa o servidor e começa o loop do jogo.
 int main(void) {
     int meu_socket;
     meu_socket = socket(AF_INET, SOCK_STREAM, 0);

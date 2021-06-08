@@ -1,0 +1,15 @@
+Trabalho desenvolvido por:
+
+Bruno Fernandes Moreira 11218712 
+Francisco de Freitas Pedrosa 11215699 
+Savio Duarte Fontes 10737251 
+Thales Willian Dalvi da Silva 11219196
+
+Esse trabalho é um jogo de Pong, onde um jogador hosteia o jogo como servidor, e o outro se conecta como cliente.
+Para se conectar no jogo é definido definir um ip e uma porta diretemente no código. 	
+Nós usamos um máquina Ligthsail na AWS atuando como um VPN de Wireguard, para expor a porta do host ao server.
+
+O código do jogo é um é composto por arquivo para o cliente (client.cpp) , um arquivo para o seridor (server.cpp) e uma biblioteca em comum (pong.cpp).
+Para controlar seu jogador é necessário digitar as teclas 'a' e 'd' seguido de enter.
+
+Testamos em maquina rodando um Ubuntu 18.04.5 como servidor, e o WSL de um Windows 10 como cliente. E foi compilado com gcc 7.5.0

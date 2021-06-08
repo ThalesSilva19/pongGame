@@ -11,18 +11,19 @@
 int meu_socket;
 struct sockaddr_in addr;
 
+//Imprime a tela do jogo em intervalos regualres de tempo.
 void game_thread(GameInfo* game){
     while(game->score_b < 10 && game->score_a < 10){
-		//game->action();
 		game->print_screen();
 		usleep(100000);
 	}
 }
 
+//Recebe as informações do jogo vindo do servidor.
 void reciver_thread(GameInfo* game){
     char response[8];
     while (game->score_b < 10 && game->score_a < 10){
-        recv(meu_socket, response, 8, 0); /* Recebe mensagem do cliente */
+        recv(meu_socket, response, 8, 0);
         game->score_a = response[0];
         game->score_b = response[1];
         game->ball_x = response[2];
@@ -31,10 +32,10 @@ void reciver_thread(GameInfo* game){
         game->speed_y = response[5];
         game->player_a = response[6];
         game->player_b = response[7];
-        //game->print_screen();
     }
 }
 
+//Lê o teclado e manda os comandos para o servidor.
 void keyEvents(GameInfo* game){	
 	while(game->score_b < 10 && game->score_a < 10){	
 		char code = getchar();
@@ -52,6 +53,7 @@ void keyEvents(GameInfo* game){
 	}
 }
 
+//Tenta conectar no servidor e inicia o loop do jogo.
 int main()
 {
 
@@ -63,6 +65,8 @@ int main()
         return 1;
     }
 
+
+	//Ip e Porta hardcoded do servidor
     addr.sin_family = AF_INET;
     addr.sin_port = htons(2201);
     addr.sin_addr.s_addr = inet_addr("34.202.4.119");
